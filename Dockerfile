@@ -49,6 +49,8 @@ tar -xzf CLion-2016.2.1.tar.gz
 rm CLion-2016.2.1.tar.gz
 ln -s /opt/clion-2016.2.1/bin/clion.sh /usr/bin/clion
 
+echo 'export MAKEFLAGS="-j4"' >>/home/nickw/.bashrc
+
 ######################################################################
 
 # Standard SSH port
