@@ -43,13 +43,14 @@ RUN chown -R nickw.nickw /home/nickw
 ######################## Install the CLion IDE ###############################
 
 USER root
-cd /opt
-wget https://download.jetbrains.com/cpp/CLion-2016.2.1.tar.gz
-tar -xzf CLion-2016.2.1.tar.gz
-rm CLion-2016.2.1.tar.gz
-ln -s /opt/clion-2016.2.1/bin/clion.sh /usr/bin/clion
 
-echo 'export MAKEFLAGS="-j4"' >>/home/nickw/.bashrc
+RUN cd /opt && \
+    wget https://download.jetbrains.com/cpp/CLion-2016.2.1.tar.gz && \
+    tar -xzf CLion-2016.2.1.tar.gz && \
+    rm CLion-2016.2.1.tar.gz && \
+    ln -s /opt/clion-2016.2.1/bin/clion.sh /usr/bin/clion
+
+#echo 'export MAKEFLAGS="-j4"' >>/home/nickw/.bashrc
 
 ######################################################################
 
