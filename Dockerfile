@@ -44,10 +44,10 @@ RUN chown -R nickw.nickw /home/nickw
 
 USER root
 
-RUN cd /opt && \
-    wget -nv https://download.jetbrains.com/cpp/CLion-2016.2.1.tar.gz && \
-    tar -xzf CLion-2016.2.1.tar.gz && \
-    rm CLion-2016.2.1.tar.gz
+#RUN cd /opt && \
+#    wget -nv https://download.jetbrains.com/cpp/CLion-2016.2.1.tar.gz && \
+#    tar -xzf CLion-2016.2.1.tar.gz && \
+#    rm CLion-2016.2.1.tar.gz
     
     #ln -s /opt/clion-2016.2.1/bin/clion.sh /usr/bin/clion
 
