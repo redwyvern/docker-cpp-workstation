@@ -35,7 +35,8 @@ RUN cd /opt && \
 VOLUME /home
 
 RUN useradd -m developer -G sudo -s /bin/bash \
-    && sed -i 's/%sudo[[:space:]]*ALL=(ALL:ALL)[[:space:]]*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers
+    && sed -i 's/%sudo[[:space:]]*ALL=(ALL:ALL)[[:space:]]*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers \
+    && chown developer.developer -R /home/developer    
 
 USER developer
 
