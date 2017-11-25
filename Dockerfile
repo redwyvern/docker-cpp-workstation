@@ -31,15 +31,7 @@ RUN git config --global user.name "${GIT_USER}" && \
     git config --global user.email "${GIT_EMAIL}" && \
     git config --global push.default simple
 
-RUN mkdir ~/src
-
-USER root
-
-VOLUME /home/nickw/src
-
 COPY ./usr /usr
-
-RUN chown -R nickw.nickw /home/nickw
 
 ######################## Install the CLion IDE ###############################
 
@@ -51,6 +43,13 @@ RUN cd /opt && \
     rm CLion-2016.2.1.tar.gz
     
 ######################################################################
+
+VOLUME /home
+
+USER root
+
+RUN useradd -m developer -G sudo -s /bin/bash \
+    && sed -i 's/%sudo[[:space:]]*ALL=(ALL:ALL)[[:space:]]*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers
 
 # Standard SSH port
 EXPOSE 22
