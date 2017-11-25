@@ -32,8 +32,6 @@ RUN cd /opt && \
     
 ######################################################################
 
-VOLUME /home
-
 RUN useradd -m developer -G sudo -s /bin/bash \
     && sed -i 's/%sudo[[:space:]]*ALL=(ALL:ALL)[[:space:]]*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers \
     && chown developer.developer -R /home/developer    
@@ -47,6 +45,8 @@ COPY authorized_keys /home/developer/.ssh/authorized_keys
 #    git config --global push.default simple
 
 USER root
+
+VOLUME /home
 
 # Standard SSH port
 EXPOSE 22
