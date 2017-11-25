@@ -19,23 +19,11 @@ RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommend
     apt-get -q autoremove && \
     apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 
-RUN useradd -m -s /bin/bash -G sudo nickw && \
-    echo "nickw:password" | chpasswd
-
-USER nickw
-
-COPY authorized_keys /home/nickw/.ssh/authorized_keys
-COPY settings.xml /home/nickw/.m2/settings.xml
-
-RUN git config --global user.name "${GIT_USER}" && \
-    git config --global user.email "${GIT_EMAIL}" && \
-    git config --global push.default simple
+USER root
 
 COPY ./usr /usr
 
 ######################## Install the CLion IDE ###############################
-
-USER root
 
 RUN cd /opt && \
     wget -nv https://download.jetbrains.com/cpp/CLion-2016.2.1.tar.gz && \
@@ -46,10 +34,16 @@ RUN cd /opt && \
 
 VOLUME /home
 
-USER root
-
 RUN useradd -m developer -G sudo -s /bin/bash \
     && sed -i 's/%sudo[[:space:]]*ALL=(ALL:ALL)[[:space:]]*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers
+
+USER developer
+
+COPY authorized_keys /home/developer/.ssh/authorized_keys
+
+RUN git config --global user.name "${GIT_USER}" && \
+    git config --global user.email "${GIT_EMAIL}" && \
+    git config --global push.default simple
 
 # Standard SSH port
 EXPOSE 22
