@@ -42,9 +42,9 @@ USER developer
 
 COPY authorized_keys /home/developer/.ssh/authorized_keys
 
-RUN git config --global user.name "${GIT_USER}" && \
-    git config --global user.email "${GIT_EMAIL}" && \
-    git config --global push.default simple
+#RUN git config --global user.name "${GIT_USER}" && \
+#    git config --global user.email "${GIT_EMAIL}" && \
+#    git config --global push.default simple
 
 # Standard SSH port
 EXPOSE 22
