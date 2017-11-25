@@ -8,6 +8,7 @@ ARG GIT_EMAIL=nick@weedon.org.au
 RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommends \
     strace \
     vim \
+    git \
     file \
     xauth \
     x11-apps \
